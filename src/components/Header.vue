@@ -9,7 +9,7 @@ export default{
 <nav class="NavBar">
   <RouterLink to="/"><img id="LogoBeQueen" src="/public/logoBeQueenCut 1.png" alt="Logo Be-Queen"></RouterLink>
   <ul class="NavBar">
-    <RouterLink to="/catalogue"><li>CATALOGUE</li></RouterLink>
+    <RouterLink  style="text-decoration: none; color: inherit;" to="/catalogue"><li>CATALOGUE</li></RouterLink>
     <li>PERSONNALISATION</li>
     <li>CONTACT</li>
     <li><img src="/public/bag-check-fill 1.png" alt=""></li>
@@ -48,6 +48,7 @@ export default{
 .NavBar
 {
   font-family: "Montserrat", sans-serif;
+ 
 }
 
 

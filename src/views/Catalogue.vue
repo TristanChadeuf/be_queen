@@ -1,43 +1,34 @@
-<script>
-export default{
+<script setup>
+import{ref,onMounted, computed} from "vue"
+import axios from "axios"
+const products = ref([]);
+
+onMounted(async()=> {
+  try {
+    const response = await axios.get("http://127.0.0.1:8000/api/product");
   
-  data() {
-    return {
-      catalogue: [],
-      loading: false,
-      error: null,
-    };
-  },
-  methods: {
-    async fetchCatalogue() {
-      this.loading = true;
-      this.error = null;
-      try {
-        const response = await fetch(
-          "http://127.0.0.1:8000/api/product"
-        );
-        if (!response.ok) {
-          throw new Error("Failed to fetch catalogue data.");
-        }
-        const data = await response.json();
-        this.catalogue = data.list; 
-      } catch (error) {
-        this.error = error.message;
-      } finally {
-        this.loading = false;
-      }
-    },
-  },
-  async mounted() {
-    await this.fetchCatalogue();
-  },
-};
+  products.value=response.data.getProductWithCategory;
+  
+  } catch (error) {
+    console.error(error);
+  }
+});
+console.log(products),
+
+
+
+computed(()=>{
+
+  filteredProduct()
+    return this.products.filter(velos=>velos.name.includes(this.searchVelo))
+  
+});
+
+
 
 </script>
 
 <template>
- 
-
   <div id="carouselExample" class="carousel slide">
   <div class="carousel-inner">
     <div class="carousel-item active">
@@ -65,31 +56,38 @@ export default{
   <h1>Nos Vélos</h1>
 </div>
 
-<div>
-    <div v-if="loading">requête en cours </div>
-    <div v-if="error" class="error">{{ error }}</div>
-    <ul v-if="!loading && !error"></ul>
-</div> 
-
 <h2>CATEGORIE 1</h2>
 
-<div v-for="(catalogue, index) in cities" :key="index" class="Produit">
-  
-    <div class="NomProduitPrix">
-      <p :key="index">{{ catalogue.name }}</p>
-      <p :key="index">{{ catalogue.price }}</p>
-    </div>
-    <div>
-      <p :key="index">{{ catalogue.description }}</p>
-      <img src="/public/bikle-modele-R-2024-2-1024x545-2.png" >
-    </div>
-    <div class="ProduitBouton">
-    <button type="button" class="btn btn-warning">AJOUT PANIER</button>
-    <button type="button" class="btn btn-secondary">PERSONNALISER</button>
-    </div>
 
+   <div>
+    <input type="search" placeholder="recherche des velos..." v-model="filteredProduct"/>
+    <table>
+      <tr>
+        <td class="searchBarre" v-for="p in filteredNames" :key="p.id">{{ p.name }}<br/><img :src="p.pic"></td>
+      </tr>
+    </table>
+   </div>
+ <div class="AllProduct">
+    <div v-for="product in products" class="Produit">
+      
+          <div>
+            <ul class="NomProduitPrix">
+            <p>{{ product.name }}</p>
+            <p>{{ product.price}}.99</p>
+            </ul>
+          </div>
+
+          <div>
+            <p>{{ product.description }}</p>
+            <img src="/public/bikle-modele-R-2024-2-1024x545-2.png" >
+          </div>
+          <div class="ProduitBouton">
+          <button type="button" class="btn btn-warning">AJOUT PANIER</button>
+          <button type="button" class="btn btn-secondary">PERSONNALISER</button>
+          </div>
+
+    </div>
 </div>
-
 
 </template>
 
@@ -105,11 +103,11 @@ export default{
 }
 .Produit
 {
+  box-shadow: 10px 5px 5px #45474B;
+  font-family: "MuseoModerno", sans-serif;
   background-color: #379777;
-  width: 35%;
+  width: 25%;
   border-radius: 5%;
-  display: flex;
-  flex-direction: column;
   margin: 2%;
 }
 .Produit p
@@ -117,11 +115,16 @@ export default{
   padding: 2%;
 
 }
+.Produit img
+{
+  width: 70%;
+
+}
 .NomProduitPrix
 {
   display: flex;
   flex-direction: row;
-  justify-content: space-between;
+  justify-content: space-evenly;
   color: #F4CE14;
   font-size: 2rem;
 }
@@ -132,5 +135,16 @@ export default{
   justify-content: space-around;
   margin-top: 1%;
   margin-bottom: 1%;
+}
+.AllProduct
+{
+  display: flex;
+  flex-direction: row;
+ flex-wrap: wrap;
+}
+.searchBarre
+{
+  display: flex;
+  justify-content: center;
 }
 </style>

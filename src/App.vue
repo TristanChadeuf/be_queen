@@ -4,8 +4,6 @@ import Header from './components/Header.vue'
 import  PageCatalogue from './views/Catalogue.vue'
 import Footer from './components/Footer.vue'
 import Accueil from './views/PageAccueil.vue'
-import axios from 'axios';
- axios("http://127.0.0.1:8000/api/product")
 
 export default{
   
@@ -22,7 +20,7 @@ export default{
 <template>
 
   <Header />
-  <router-view></router-view> 
+  <router-view ></router-view > 
   <Footer />
 
   
