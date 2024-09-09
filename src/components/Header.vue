@@ -13,8 +13,8 @@ export default{
     <RouterLink to="/catalogue"><li>CATALOGUE</li></RouterLink>
     <RouterLink to="/Personnalisation"><li>PERSONNALISATION</li></RouterLink>
     <li>CONTACT</li>
-    <button @click="store.toggleIsDisplayed()"><img src="/public/bag-check-fill 1.png" alt="cart icon" width="30" height="30" /></button>
-    <li><img src="/public/user-solid 1.png" alt=""></li>
+    <RouterLink to="/Cart"><img src="/public/bag-check-fill 1.png" alt="Panier"></RouterLink>
+    <li><img src="/public/user-solid 1.png" alt="User"></li>
 </ul>
 </nav>
 </header>
