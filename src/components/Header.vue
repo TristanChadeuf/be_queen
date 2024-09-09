@@ -1,4 +1,5 @@
 <script>
+import { RouterLink } from 'vue-router';
 export default{
   name:"PageAccueil"
 }
@@ -9,10 +10,10 @@ export default{
 <nav class="NavBar">
   <RouterLink to="/"><img id="LogoBeQueen" src="/public/logoBeQueenCut 1.png" alt="Logo Be-Queen"></RouterLink>
   <ul class="NavBar">
-    <RouterLink  style="text-decoration: none; color: inherit;" to="/catalogue"><li>CATALOGUE</li></RouterLink>
-    <li>PERSONNALISATION</li>
+    <RouterLink to="/catalogue"><li>CATALOGUE</li></RouterLink>
+    <RouterLink to="/Personnalisation"><li>PERSONNALISATION</li></RouterLink>
     <li>CONTACT</li>
-    <li><img src="/public/bag-check-fill 1.png" alt=""></li>
+    <button @click="store.toggleIsDisplayed()"><img src="/public/bag-check-fill 1.png" alt="cart icon" width="30" height="30" /></button>
     <li><img src="/public/user-solid 1.png" alt=""></li>
 </ul>
 </nav>
@@ -26,6 +27,10 @@ export default{
   list-style: none;
 }
 
+a{
+  text-decoration: none;
+  color: white
+}
  .NavBar
  {
   display: flex;
@@ -34,6 +39,8 @@ export default{
   width: 100%;
   background-color: #379777;
   padding-top: 1%;
+  text-decoration: none;
+  color: white;
 
  }
 
