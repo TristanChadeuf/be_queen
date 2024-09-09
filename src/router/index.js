@@ -1,3 +1,4 @@
+
 import { createRouter, createWebHistory } from 'vue-router'
 import Accueil from '../views/PageAccueil.vue'
 import Catalogue from '../views/CatalogueView.vue'
